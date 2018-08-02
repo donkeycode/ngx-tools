@@ -12,7 +12,7 @@
     "npm-pack": "cd dist/ngx-tools && npm pack",
     "package": "npm run build-lib && npm run npm-pack"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@angular/common": "^6.0.3",
     "@angular/core": "^6.0.3",
