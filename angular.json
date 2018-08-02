@@ -116,6 +116,46 @@
           }
         }
       }
+    },
+    "ngx-tools": {
+      "root": "projects/ngx-tools",
+      "sourceRoot": "projects/ngx-tools/src",
+      "projectType": "library",
+      "prefix": "ngx-tools",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/ngx-tools/tsconfig.lib.json",
+            "project": "projects/ngx-tools/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/ngx-tools/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-tools/src/test.ts",
+            "tsConfig": "projects/ngx-tools/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-tools/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngx-tools/tsconfig.lib.json",
+              "projects/ngx-tools/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ngx-tools-app"
