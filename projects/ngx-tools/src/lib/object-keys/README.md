@@ -22,5 +22,5 @@ export class AppModule { }
 
 ### Use
 
-`<ng-template ngFor let-day [ngForOf]="(days | appKeys)"></ng-template>`
+`<ng-template ngFor let-day [ngForOf]="(days | ngtObjectKeys)"></ng-template>`
 

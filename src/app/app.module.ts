@@ -13,6 +13,6 @@ import { NgxToolsModule } from 'ngx-tools/ngx-tools';
     NgxToolsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

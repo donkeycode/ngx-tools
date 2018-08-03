@@ -1,13 +1,15 @@
-import { NgModule, Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer, SafeHtml, SafeStyle, SafeScript, SafeUrl, SafeResourceUrl } from '@angular/platform-browser';
 
 @Pipe({ name: 'ngtSafe', pure: false })
-export class SafeHtml implements PipeTransform {
+export class SafePipe implements PipeTransform {
   constructor(
     private sanitizer: DomSanitizer
   ) {}
 
-  transform(value: string, typeSafe: SafeType = 'html') {
+  transform(value: string, typeSafe: SafeType = 'html')
+    : SafeHtml|SafeStyle|SafeScript|SafeUrl|SafeResourceUrl
+  {
     if (typeSafe === 'html') {
       return this.sanitizer.bypassSecurityTrustHtml(value);
     }
@@ -16,8 +18,21 @@ export class SafeHtml implements PipeTransform {
       return this.sanitizer.bypassSecurityTrustStyle(value);
     }
 
-    return '';
+    if (typeSafe === 'script') {
+      return this.sanitizer.bypassSecurityTrustScript(value);
+    }
+
+    if (typeSafe === 'url') {
+      return this.sanitizer.bypassSecurityTrustUrl(value);
+    }
+
+    if (typeSafe === 'ressource') {
+      return this.sanitizer.bypassSecurityTrustResourceUrl(value);
+    }
+
+    console.warn('SafePipe - no type in argument')
+    return value;
   }
 }
 
-type SafeType = 'html' | 'style';
+export type SafeType = 'html' | 'style' | 'script' | 'url' | 'ressource';
