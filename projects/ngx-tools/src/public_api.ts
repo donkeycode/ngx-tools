@@ -8,3 +8,4 @@ export * from './lib/auth/auth.module';
 export * from './lib/safe/safe.module';
 export * from './lib/object-keys/object-keys.module';
 export * from './lib/object-values/object-values.module';
+export * from './lib/validator/validator.module';
