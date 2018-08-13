@@ -11,7 +11,26 @@ export class AppComponent {
   dataForm = {
     test: ''
   };
+  public errors;
+
   public submit() {
-    console.log("coucou", this.form);
+    console.log("submit", this.form);
+  }
+
+  public errorBack() {
+    this.errors = {
+      status: 'error',
+      errors: {
+        errors: [
+          'error message 1',
+          'error message 2'
+        ],
+        children: {
+          test: {
+            errors: [ 'error message 3' ]
+          }
+        }
+      }
+    };
   }
 }

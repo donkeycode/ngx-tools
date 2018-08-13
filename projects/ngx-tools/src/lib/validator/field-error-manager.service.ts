@@ -13,9 +13,9 @@ export class NgtFieldErrorManagerService {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
 
-  public errorOnControl(formElement: any, name: string, control: AbstractControl) :void {
+  public errorOnControl(formElement: any, name: string, control: AbstractControl, backendErrors: string[] = []) :void {
     const divError = this.createErrorFieldElement(name);
-    this.addErrorMessages(control, divError);
+    this.addErrorMessages(control, divError, backendErrors);
     const input = formElement.querySelector('[name="' + name +'"]');
     this.renderer.insertBefore(formElement, divError, input);
   }
@@ -44,9 +44,21 @@ export class NgtFieldErrorManagerService {
     return elem;
   }
 
-  private addErrorMessages(control: AbstractControl, element: any): void {
+  private addErrorMessages(control: AbstractControl, element: any, backendErrors: string[]): void {
+    if (backendErrors.length) {
+      // Errors BACK
+    for (let error of backendErrors) {
+      element.textContent = element.textContent
+        ? element.textContent + '' + error
+        : error;
+    }
+      return;
+    }
+    // Errors FRONT
     for (let error of Object.keys(control.errors)) {
-      element.textContent = this.errorsMapping[error];
+      element.textContent = element.textContent
+        ? element.textContent + '' + this.errorsMapping[error]
+        : this.errorsMapping[error];
     }
   }
 }

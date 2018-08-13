@@ -16,4 +16,34 @@ import { NgxToolsModule } from '../../projects/ngx-tools/src/lib/ngx-tools.modul
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule { }
+export class AppModule {
+  public errors;
+
+  public boom400() {
+    this.errors = {
+      status: 'error',
+      errors: {
+        errors: [
+          'error message 1',
+          'error message 2'
+        ],
+        children: {
+          field: {
+            errors: [ 'error message 3' ]
+          },
+          'field-parent': {
+            children: [
+              {
+                children: {
+                  'field-child': {
+                    errors: [ 'error message 4' ]
+                  },
+                }
+              }
+            ]
+          }
+        }
+      }
+    };
+  }
+}

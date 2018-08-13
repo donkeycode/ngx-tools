@@ -1,13 +1,16 @@
-import { Component, Input, OnInit, ElementRef, Renderer2 } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, Renderer2, OnDestroy, OnChanges } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { NgtFieldErrorManagerService } from './field-error-manager.service';
+import { SymfonyError } from './symfony-errors';
+
 @Component({
   selector: 'ngt-validator',
   templateUrl: 'validator.component.html'
 })
 
-export class NgtValidatorComponent implements OnInit {
+export class NgtValidatorComponent implements OnInit, OnDestroy, OnChanges {
   @Input() frontend: NgForm;
+  @Input() symfony: SymfonyError;
   public errorMessages: string[] = [];
 
   private subscriptionValues;
@@ -23,10 +26,15 @@ export class NgtValidatorComponent implements OnInit {
 
   public ngOnInit() {
     this.frontend.form.valueChanges
-      .subscribe(values => this.valuesChanged(values));
-    //
+      .subscribe(values => this.valuesChanged());
     this.frontend.form.statusChanges
       .subscribe(status => this.statusChanged(status));
+  }
+
+  public ngOnChanges(changes) {
+    if (changes.symfony && typeof this.symfony === 'object') {
+      this.setSymfonyError(this.symfony);
+    }
   }
 
   public ngOnDestroy() {
@@ -47,8 +55,37 @@ export class NgtValidatorComponent implements OnInit {
     }
   }
 
-  private valuesChanged(values: any) {
-    console.log('values', values);
+  private valuesChanged() {
     this.fieldErrorManager.clearErrorDiv(this.elementRef.nativeElement, this.frontend.controls);
+  }
+
+  private setSymfonyError(error) {
+    error = error.errors;
+    this.setSymfonyErrorsField(error);
+    this.setSymfonyErrorsForm(error);
+  }
+
+  private setSymfonyErrorsField(errors) {
+    if (!errors || !errors.children) {
+      return;
+    }
+
+    const fields = Object.keys(errors.children);
+
+    for (const field of fields) {
+      const errorField = errors.children[field].errors;
+      if (!errorField) {
+        continue;
+      }
+      const element = this.renderer2.parentNode(this.elementRef.nativeElement);
+      this.fieldErrorManager.errorOnControl(element, field, this.frontend.controls[field], errorField);
+    }
+  }
+
+  private setSymfonyErrorsForm(error) {
+    if (!error || !error.errors) {
+      return;
+    }
+    this.errorMessages = error.errors;
   }
 }
