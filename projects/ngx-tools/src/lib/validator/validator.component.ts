@@ -46,7 +46,6 @@ export class NgtValidatorComponent implements OnInit, OnDestroy, OnChanges {
     if (status !== 'INVALID') {
       return;
     }
-
     for (let controlName of Object.keys(this.frontend.controls)) {
       if (!this.frontend.controls[controlName].dirty) {
         continue;

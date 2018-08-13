@@ -21,14 +21,13 @@ export class phoneValidatorDirective implements Validator {
   }
 
   validate(c: FormControl) {
-    console.log(this.validator(c));
     return this.validator(c);
   }
 
   phoneValidator(): ValidatorFn {
     return (control: FormControl) => {
       if (!control.value) {
-        return;
+        return null;
       }
 
       const returnError = { phoneNumber: true };

@@ -4,9 +4,10 @@ import { AbstractControl } from '@angular/forms';
 @Injectable()
 export class NgtFieldErrorManagerService {
   public renderer: Renderer2;
-
+  defaultFieldErrorMessage = 'Invalid field';
   errorsMapping = {
-    required: 'Field is required'
+    required: 'Field is required',
+    phoneNumber: 'Required valid phone number'
   };
 
   constructor(rendererFactory: RendererFactory2) {
@@ -48,25 +49,28 @@ export class NgtFieldErrorManagerService {
   private addErrorMessages(control: AbstractControl, element: any, backendErrors: string[]): void {
     if (backendErrors.length) {
       // Errors BACK
-    for (let error of backendErrors) {
-      element.textContent = element.textContent
-        ? element.textContent + '' + error
-        : error;
+      for (let error of backendErrors) {
+        element.textContent = element.textContent
+          ? element.textContent + '' + error
+          : error;
+      }
+      return;
     }
+
+    if (!control.errors) {
       return;
     }
     // Errors FRONT
     for (let error of Object.keys(control.errors)) {
       element.textContent = element.textContent
-        ? element.textContent + '' + this.errorsMapping[error]
-        : this.errorsMapping[error];
+        ? element.textContent + '' + (this.errorsMapping[error] || this.defaultFieldErrorMessage)
+        : (this.errorsMapping[error] || this.defaultFieldErrorMessage);
     }
   }
 
   private getFormElement(element) {
     const parent = this.renderer.parentNode(element);
     if (parent.tagName === 'FORM') {
-      console.log("FORM", parent);
       return parent;
     }
     return this.getFormElement(parent);
