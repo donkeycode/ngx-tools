@@ -6,6 +6,7 @@ Tools inside:
 - Pipe Object.keys()
 - Pipe Safe : https://angular.io/api/platform-browser/DomSanitizer
 
+- Ngt-validator : Custom form validator with front and back errors management. Include : phone number validator (google library)
 
 Recommanded tools :
 * ng-select : Using ng-select/ng-select https://github.com/ng-select/ng-select
@@ -17,7 +18,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
 
 #########
 
