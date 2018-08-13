@@ -5,7 +5,12 @@
 
   <form #form="ngForm" (ngSubmit)="submit()">
     <ngt-validator [frontend]="form" [symfony]="errors"></ngt-validator>
-    <input type="text" ngModel name="test" required>
+
+    <input id="test" type="text" ngModel name="test" required>
+    <hr>
+    <input id="phone" type="phone" ngModel name="phone" ngt-phone>
+    <hr>
+
     <button type="submit">submit</button>
   </form>
 
