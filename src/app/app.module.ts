@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { NgxToolsModule } from 'ngx-tools';
+import { NgxToolsModule } from '../../projects/ngx-tools/src/lib/ngx-tools.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +13,6 @@ import { NgxToolsModule } from 'ngx-tools';
     NgxToolsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
