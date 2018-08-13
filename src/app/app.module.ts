@@ -12,9 +12,8 @@ import { NgxToolsModule } from '../../projects/ngx-tools/src/lib/ngx-tools.modul
   imports: [
     BrowserModule,
     NgxToolsModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

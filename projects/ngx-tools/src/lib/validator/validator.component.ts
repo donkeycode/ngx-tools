@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ElementRef, Renderer2 } from '@angular/core';
-import { NgForm, AbstractControl } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { NgtFieldErrorManagerService } from './field-error-manager.service';
 @Component({
   selector: 'ngt-validator',
@@ -17,7 +17,9 @@ export class NgtValidatorComponent implements OnInit {
     private elementRef: ElementRef,
     private renderer2: Renderer2,
     private fieldErrorManager: NgtFieldErrorManagerService
-  ) {}
+  ) {
+    this.fieldErrorManager.renderer = this.renderer2;
+  }
 
   public ngOnInit() {
     this.frontend.form.valueChanges
@@ -49,10 +51,4 @@ export class NgtValidatorComponent implements OnInit {
     console.log('values', values);
     this.fieldErrorManager.clearErrorDiv(this.elementRef.nativeElement, this.frontend.controls);
   }
-
-
-
-
-
-
 }

@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { ObjectKeysPipeModule } from './object-keys/object-keys.module';
 import { ObjectValuesPipeModule } from './object-values/object-values.module';
 import { SafePipeModule } from './safe/safe.module';
+import { NgtValidatorModule } from './validator/validator.module';
 
 const imports = [
   ObjectKeysPipeModule,
@@ -15,11 +16,13 @@ const imports = [
 @NgModule({
   imports: [
     CommonModule,
+    NgtValidatorModule.forRoot(),
     ...imports,
   ],
   declarations: [],
   exports: [
+    NgtValidatorModule,
     ...imports,
   ]
 })
-export class NgxToolsModule { }
+export class NgxToolsModule {}

@@ -1,21 +1,23 @@
-import { Injectable, Renderer2 } from '@angular/core';
+import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 @Injectable()
 export class NgtFieldErrorManagerService {
+  public renderer: Renderer2;
+
   errorsMapping = {
     required: 'Field is required'
   };
 
-  constructor(
-    private renderer2: Renderer2
-  ) {}
+  constructor(rendererFactory: RendererFactory2) {
+    this.renderer = rendererFactory.createRenderer(null, null);
+  }
 
   public errorOnControl(formElement: any, name: string, control: AbstractControl) :void {
     const divError = this.createErrorFieldElement(name);
     this.addErrorMessages(control, divError);
     const input = formElement.querySelector('[name="' + name +'"]');
-    this.renderer2.insertBefore(formElement, divError, input);
+    this.renderer.insertBefore(formElement, divError, input);
   }
 
   public clearErrorDiv(element: any, controls: any): void {
@@ -26,19 +28,19 @@ export class NgtFieldErrorManagerService {
       ) {
         return;
       }
-      const oldErrorDiv = this.renderer2.parentNode(element)
+      const oldErrorDiv = this.renderer.parentNode(element)
         .querySelector('*[data-error-field="' + controlName +'"]');
       if (!oldErrorDiv) {
         continue;
       }
-      this.renderer2.removeChild(this.renderer2.parentNode(element), oldErrorDiv);
+      this.renderer.removeChild(this.renderer.parentNode(element), oldErrorDiv);
     }
   }
 
   private createErrorFieldElement(name: string): any {
-    const elem = this.renderer2.createElement('div');
-    this.renderer2.setAttribute(elem, 'class', 'error-field');
-    this.renderer2.setAttribute(elem, 'data-error-field', name);
+    const elem = this.renderer.createElement('div');
+    this.renderer.setAttribute(elem, 'class', 'error-field');
+    this.renderer.setAttribute(elem, 'data-error-field', name);
     return elem;
   }
 
