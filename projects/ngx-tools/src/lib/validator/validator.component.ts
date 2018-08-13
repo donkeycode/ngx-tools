@@ -51,12 +51,19 @@ export class NgtValidatorComponent implements OnInit, OnDestroy, OnChanges {
       if (!this.frontend.controls[controlName].dirty) {
         continue;
       }
-      this.fieldErrorManager.errorOnControl(this.renderer2.parentNode(this.elementRef.nativeElement), controlName, this.frontend.controls[controlName]);
+      this.fieldErrorManager.errorOnControl(
+        this.elementRef.nativeElement,
+        controlName,
+        this.frontend.controls[controlName]
+      );
     }
   }
 
   private valuesChanged() {
-    this.fieldErrorManager.clearErrorDiv(this.elementRef.nativeElement, this.frontend.controls);
+    this.fieldErrorManager.clearErrorDiv(
+      this.elementRef.nativeElement,
+      this.frontend.controls
+    );
   }
 
   private setSymfonyError(error) {
@@ -77,8 +84,12 @@ export class NgtValidatorComponent implements OnInit, OnDestroy, OnChanges {
       if (!errorField) {
         continue;
       }
-      const element = this.renderer2.parentNode(this.elementRef.nativeElement);
-      this.fieldErrorManager.errorOnControl(element, field, this.frontend.controls[field], errorField);
+      this.fieldErrorManager.errorOnControl(
+        this.elementRef.nativeElement,
+        field,
+        this.frontend.controls[field],
+        errorField
+      );
     }
   }
 

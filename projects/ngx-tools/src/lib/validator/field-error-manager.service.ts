@@ -13,14 +13,16 @@ export class NgtFieldErrorManagerService {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
 
-  public errorOnControl(formElement: any, name: string, control: AbstractControl, backendErrors: string[] = []) :void {
+  public errorOnControl(elem: any, name: string, control: AbstractControl, backendErrors: string[] = []) :void {
+    const formElement = this.getFormElement(elem);
     const divError = this.createErrorFieldElement(name);
     this.addErrorMessages(control, divError, backendErrors);
     const input = formElement.querySelector('[name="' + name +'"]');
-    this.renderer.insertBefore(formElement, divError, input);
+    this.renderer.insertBefore(this.renderer.parentNode(input), divError, input);
   }
 
-  public clearErrorDiv(element: any, controls: any): void {
+  public clearErrorDiv(elm: any, controls: any): void {
+    const formElement = this.getFormElement(elm);
     for (let controlName of Object.keys(controls)) {
       if (
         !controls[controlName].dirty
@@ -28,12 +30,11 @@ export class NgtFieldErrorManagerService {
       ) {
         return;
       }
-      const oldErrorDiv = this.renderer.parentNode(element)
-        .querySelector('*[data-error-field="' + controlName +'"]');
+      const oldErrorDiv = formElement.querySelector('*[data-error-field="' + controlName +'"]');
       if (!oldErrorDiv) {
         continue;
       }
-      this.renderer.removeChild(this.renderer.parentNode(element), oldErrorDiv);
+      oldErrorDiv.remove()
     }
   }
 
@@ -60,5 +61,14 @@ export class NgtFieldErrorManagerService {
         ? element.textContent + '' + this.errorsMapping[error]
         : this.errorsMapping[error];
     }
+  }
+
+  private getFormElement(element) {
+    const parent = this.renderer.parentNode(element);
+    if (parent.tagName === 'FORM') {
+      console.log("FORM", parent);
+      return parent;
+    }
+    return this.getFormElement(parent);
   }
 }
