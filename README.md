@@ -1,14 +1,23 @@
 # NgxToolsApp
 
-Tools 
-* ngt-select : Using ng-select/ng-select https://github.com/ng-select/ng-select
+Tools inside:
+
+- Pipe Object.values()
+- Pipe Object.keys()
+- Pipe Safe : https://angular.io/api/platform-browser/DomSanitizer
+
+- Ngt-validator : Custom form validator with front and back errors management. Include : phone number validator (google library)
+
+Recommanded tools :
+* ng-select : Using ng-select/ng-select https://github.com/ng-select/ng-select
+* Component https://github.com/akveo/ngx-admin
+* Theme : https://github.com/akveo/nebular/
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.5.
 
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
 
 #########
 
@@ -18,17 +27,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Build
 
-After changes, don't forget => `ng build-lib`
-
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+After changes, don't forget => `npm run package`

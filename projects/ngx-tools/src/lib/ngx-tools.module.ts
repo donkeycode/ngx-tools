@@ -4,21 +4,25 @@ import { CommonModule } from '@angular/common';
 // PIPES
 import { ObjectKeysPipeModule } from './object-keys/object-keys.module';
 import { ObjectValuesPipeModule } from './object-values/object-values.module';
-
 import { SafePipeModule } from './safe/safe.module';
+import { NgtValidatorModule } from './validator/validator.module';
+
+const imports = [
+  ObjectKeysPipeModule,
+  SafePipeModule,
+  ObjectValuesPipeModule,
+];
 
 @NgModule({
   imports: [
     CommonModule,
-    ObjectKeysPipeModule,
-    SafePipeModule,
-    ObjectValuesPipeModule,
+    NgtValidatorModule.forRoot(),
+    ...imports,
   ],
   declarations: [],
   exports: [
-    ObjectKeysPipeModule,
-    SafePipeModule,
-    ObjectValuesPipeModule,
+    NgtValidatorModule,
+    ...imports,
   ]
 })
-export class NgxToolsModule { }
+export class NgxToolsModule {}
