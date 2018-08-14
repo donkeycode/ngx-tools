@@ -17,7 +17,7 @@ title: Ngx-Tools
 email: hello@donkeycode.com
 description: >- # this means to ignore newlines until "baseurl:"
   Set of practical tools for Angular projects.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/ngx-tools" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 google_analytics: ""
 
