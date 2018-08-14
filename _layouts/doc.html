@@ -28,10 +28,10 @@
             <div class="container">
                 <div class="branding">
                     <h1 class="logo">
-                        <a href="index.html">
+                        <a href="{{ site.baseurl }}/index.html">
                             <span aria-hidden="true" class="icon_documents_alt icon"></span>
-                            <span class="text-highlight">Opera</span>
-                            <span class="text-bold">Project</span>
+                            <span class="text-highlight">NGX</span>
+                            <span class="text-bold">TOOLS</span>
                         </a>
                     </h1>
                 </div>
@@ -40,12 +40,12 @@
                 <ol class="breadcrumb">
 
                     <li class="breadcrumb-item">
-                        <a href="index.html">Home</a>
+                        <a href="{{ site.baseurl }}/index.html">Home</a>
                     </li>
 
                     {% for p in page.ancestors %}
                     <li class="breadcrumb-item">
-                        <a href="{{ site.baseurl}}{{ p.url }}">{{ p.title }}</a>
+                        <a href="{{ site.baseurl }}/{{ p.url }}">{{ p.title }}</a>
                     </li>
                     {% endfor %}
                     <li class="breadcrumb-item active">{{ page.title }}</li>
