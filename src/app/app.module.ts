@@ -16,5 +16,4 @@ import { NgxToolsModule } from '../../projects/ngx-tools/src/lib/ngx-tools.modul
   ],
   bootstrap: [ AppComponent ]
 })
-export class AppModule {
-}
+export class AppModule {}
