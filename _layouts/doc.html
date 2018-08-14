@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: " en-US " }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+        rel='stylesheet' type='text/css'>
+    <!-- FontAwesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.1.1/js/all.js" integrity="sha384-BtvRZcyfv4r0x/phJt9Y9HhnN5ur1Z+kZbKVgzVBAlQZX4jvAuImlIz+bG7TS00a"
+        crossorigin="anonymous"></script>
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{{ 'plugins/bootstrap/css/bootstrap.min.css?v=' | append: site.github.build_revision | relative_url }}">
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="{{ 'plugins/elegant_font/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <!-- Theme CSS -->
+    <link id="theme-style" rel="stylesheet" href="{{ 'assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}"> {% seo %}
+</head>
+
+<body class="{{ page.body_class }}">
+    <div class="page-wrapper">
+
+        <!-- ******Header****** -->
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">Opera</span>
+                            <span class="text-bold">Project</span>
+                        </a>
+                    </h1>
+                </div>
+                <!--//branding-->
+
+                <ol class="breadcrumb">
+
+                    <li class="breadcrumb-item">
+                        <a href="index.html">Home</a>
+                    </li>
+
+                    {% for p in page.ancestors %}
+                    <li class="breadcrumb-item">
+                        <a href="{{ site.baseurl}}{{ p.url }}">{{ p.title }}</a>
+                    </li>
+                    {% endfor %}
+                    <li class="breadcrumb-item active">{{ page.title }}</li>
+                </ol>
+            </div>
+            <!--//container-->
+        </header>
+        <!--//header-->
+
+        <div class="doc-wrapper">
+            <div class="container">
+                <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title">{{ page.title }}</h1>
+                </div>
+                <!--//doc-header-->
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                           {{ content }}
+
+                        </div>
+                        <!--//content-inner-->
+                    </div>
+                    <!--//doc-content-->
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+        
+                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+                                <ul class="toc"></ul>
+                            </nav>
+                            <!--//doc-menu-->
+        
+                        </div>
+                    </div>
+                    <!--//doc-sidebar-->
+                </div>
+                <!--//doc-body-->
+            </div>
+            <!--//container-->
+        </div>
+    </div>
+
+    {% if site.google_analytics %}
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', '{{ site.google_analytics }}', 'auto');
+        ga('send', 'pageview');
+    </script> {% endif %}
+
+
+
+    <!-- Main Javascript -->
+    <script type="text/javascript" src="{{ 'plugins/jquery-3.3.1.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script type="text/javascript" src="{{ '/js/jquery.tableofcontents.min.js' | relative_url }}" charset="utf-8"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.toc').tableOfContents($('.doc-content')[0], { startLevel: 2 });
+            var firstH1 = $('.doc-content h1');
+            if (firstH1.length) {
+                $('.toc').insertAfter(firstH1);
+            }
+        });
+    </script>
+    <script type="text/javascript" src="{{ 'plugins/bootstrap/js/bootstrap.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script type="text/javascript" src="{{ 'plugins/stickyfill/dist/stickyfill.min.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+    <script type="text/javascript" src="{{ 'js/main.js?v=' | append: site.github.build_revision | relative_url }}"></script>
+</body>
+
+</html>
