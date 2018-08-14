@@ -1,6 +1,6 @@
 {
-  "name": "ngx-tools",
-  "version": "0.0.1",
+  "name": "ngx-tools-app",
+  "version": "0.0.2",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
