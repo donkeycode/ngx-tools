@@ -1,6 +1,6 @@
 {
   "name": "ngx-tools-contribute",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build-lib": "ng build --prod ngx-tools",
-    "npm-pack": "cd dist/ngx-tools && npm pack",
+    "npm-pack": "cd dist/ngx-tools-app && npm pack",
     "package": "npm run build-lib && npm run npm-pack"
   },
   "private": false,
